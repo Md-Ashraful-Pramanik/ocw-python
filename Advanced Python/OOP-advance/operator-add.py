@@ -1,0 +1,56 @@
+from copy import deepcopy
+
+class Matrix:
+    def __init__(self, matrix):
+        self.data = matrix
+        self.num_rows = len(matrix)
+        self.num_cols = len(matrix[0])
+    
+    # Matrix + Matrix
+    # Matrix + scalar
+    def __add__(self, other):
+        result = deepcopy(self)
+
+        if type(other) == Matrix:
+            for row_idx in range(self.num_rows):
+                for col_idx in range(self.num_cols):
+                    result.data[row_idx][col_idx] += other.data[row_idx][col_idx]
+            return result  
+        else:
+            for row_idx in range(self.num_rows):
+                for col_idx in range(self.num_cols):
+                    result.data[row_idx][col_idx] += other
+            return result  
+    
+    # scalar + matrix
+    def __radd__(self, other):
+        return self + other
+    
+    def __str__(self):
+        matrix_string = ''
+        for row in self.data:
+            for cell in row:
+                matrix_string += str(cell) + " "
+            matrix_string += "\n"
+        return matrix_string
+
+m1 = Matrix(
+    matrix=[
+        [1, 2, 3],
+        [5, 7, 1],
+        [1, 5, 9]
+    ]
+)
+
+m2 = Matrix(
+    matrix=[
+        [5, 2, 5],
+        [1, 3, 2],
+        [4, 3, 4]
+    ]
+)
+
+print(m1 + m2)
+print(m1)
+print(m1 + 5)
+print(5 + m1)
