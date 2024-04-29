@@ -30,6 +30,10 @@ class Car:
     
     def get_making_price(self):
         return self.__making_price
+    
+    def set_making_price(self, making_price):
+        self.__making_price = making_price
+
 
 # Encapsulation
 a = Car(
@@ -50,3 +54,8 @@ print(a._Car__making_price) # private _<ClassName><PrivatePropertyName>
 print(a.__dict__.keys())
 print(a.__dict__.values())
 
+print(a.get_making_price())
+a.set_making_price(5000000)
+print(a.get_making_price())
+a._Car__making_price = 6000000
+print(a.get_making_price())
